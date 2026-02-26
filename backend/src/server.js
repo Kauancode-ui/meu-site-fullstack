@@ -1,16 +1,14 @@
-const app = require("./app");
-const { port } = require("./config/env");
+require('dotenv').config();
+
+const app = require('./app');
 const pool = require('./config/database');
 
-const PORT = 3000;
-
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
+const PORT = process.env.PORT || 3000;
 
 pool.connect()
   .then(() => {
     console.log('Banco conectado com sucesso');
+
     app.listen(PORT, () => {
       console.log(`Servidor rodando na porta ${PORT}`);
     });
